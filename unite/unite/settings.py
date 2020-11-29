@@ -59,7 +59,7 @@ CORS_ALLOW_METHODS = [
     'OPTIONS'
 ]
 
-ALLOWED_HOSTS = ['uniteapi.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
