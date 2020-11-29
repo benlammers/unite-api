@@ -33,11 +33,21 @@ DEBUG = os.environ.get('DEBUG_VALUE')
 
 # CORS SETUP
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    'https://benandmadison.ca',
+
+cors_origin_whitelist = (
     'http://127.0.0.1',
     'http://localhost',
 )
+
+if (os.environ.get('FRONTEND_URL') != None):
+    frontend_url = os.environ.get('FRONTEND_URL')
+    cors_origin_whitelist = (
+        'http://127.0.0.1',
+        'http://localhost',
+         frontend_url
+    )
+
+CORS_ORIGIN_WHITELIST = cors_origin_whitelist
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -118,12 +128,12 @@ WSGI_APPLICATION = 'unite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dc6ncslhq9lib9',
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
         'USER': os.environ.get('DATABASE_USER'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
         'HOST': os.environ.get('DATABASE_HOST'),
-        'PORT': '5432',
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
@@ -169,11 +179,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Email Credentials used to send verification emails
 # This will need to be replaced with environment variables on Heroku
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_EMAIL')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
