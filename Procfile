@@ -1,1 +1,1 @@
-web: gunicorn unite unite.wsgi --log-file - 
+web: gunicorn unite unite.wsgi --log-file
