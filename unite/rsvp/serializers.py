@@ -2,11 +2,6 @@ from rest_framework import serializers
 
 from .models import (Song, Guest, Group)
 
-class SongSerializer(serializers.ModelSerializer):
-   class Meta: 
-      model = Song
-      fields = ["id", "title", "artist", "image_uri"]
-
 class GuestSerializer(serializers.ModelSerializer):
    class Meta: 
       model = Guest
@@ -48,8 +43,3 @@ class GroupUpdateSerializer(serializers.ModelSerializer):
       instance.rsvp = validated_data["rsvp"]
       instance.save()
       return instance
-
-class GroupSerializer(serializers.ModelSerializer):
-   class Meta: 
-      model = Group
-      fields = ["id", "rsvp"]

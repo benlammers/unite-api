@@ -1,8 +1,6 @@
 from rest_framework import generics
 
-from .serializers import (SongSerializer, GuestSerializer,
-                          GuestUpdateSerializer, GroupUpdateSerializer,
-                          GroupSerializer)
+from .serializers import (GuestSerializer, GuestUpdateSerializer, GroupUpdateSerializer)
 from .models import (Song, Guest, Group)
 
 from django.core.mail import EmailMessage
@@ -25,24 +23,6 @@ def get_spotify_token(request):
     headers = {"Authorization": os.environ.get('SPOTIFY_TOKEN')}
     response = requests.post(spotify_url, data=data, headers=headers)
     return JsonResponse({"token": response.json()['access_token']})
-
-
-class SongView(generics.ListAPIView):
-    ''' Retrieve List of All Songs '''
-    queryset = Song.objects.all().order_by('title')
-    serializer_class = SongSerializer
-
-
-class GuestView(generics.ListAPIView):
-    ''' Retrieve List of All Guests '''
-    queryset = Guest.objects.all().order_by('name')
-    serializer_class = GuestSerializer
-
-
-class GroupView(generics.ListAPIView):
-    ''' Retrieve List of All Groups '''
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
 
 
 class GroupSearchView(generics.ListAPIView):

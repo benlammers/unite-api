@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from django.http import (HttpResponse)
+
 admin.site.site_header = 'Unite Admin'
 admin.site.index_title = 'Unite Features'
 admin.site.site_title = 'Admin'
 
+def apiIndex(self):
+    return HttpResponse("Unite API")
+
 urlpatterns = [
+    path("", apiIndex, name="index"),
     path('api/', include('rsvp.urls')),
     path('admin/', admin.site.urls),
 ]
