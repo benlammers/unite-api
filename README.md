@@ -1,6 +1,6 @@
 # Unite Rest API
 
-This is a simple Django application to provide a REST
+A simple Django application to provide a REST
 API to the Unite application.
 
 The entire application is contained within the /unite folder.
